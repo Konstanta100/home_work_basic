@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/Konstanta100/hw02_fix_app/types"
+	"github.com/Konstanta100/home_work_basic/hw02_fix_app/types"
 )
 
 func ReadJSON(filePath string) ([]types.Employee, error) {
