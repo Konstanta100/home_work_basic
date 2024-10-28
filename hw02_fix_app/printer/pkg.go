@@ -3,7 +3,7 @@ package printer
 import (
 	"fmt"
 
-	"github.com/fixme_my_friend/hw02_fix_app/types"
+	"github.com/Konstanta100/hw02_fix_app/types"
 )
 
 func PrintStaff(staff []types.Employee) {
