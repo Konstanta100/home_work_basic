@@ -9,11 +9,11 @@ type Book struct {
 	rate   float64
 }
 
-func (b *Book) Id() int {
+func (b *Book) ID() int {
 	return b.id
 }
 
-func (b *Book) SetId(id int) {
+func (b *Book) SetID(id int) {
 	b.id = id
 }
 
