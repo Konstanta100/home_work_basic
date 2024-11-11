@@ -9,7 +9,7 @@ import (
 
 func main() {
 	book1 := entity.Book{}
-	book1.SetId(1)
+	book1.SetID(1)
 	book1.SetTitle("test1")
 	book1.SetAuthor("Тестер1")
 	book1.SetYear(2000)
@@ -17,7 +17,7 @@ func main() {
 	book1.SetRate(4.2)
 
 	book2 := entity.Book{}
-	book2.SetId(2)
+	book2.SetID(2)
 	book2.SetTitle("test2")
 	book2.SetAuthor("Тестер2")
 	book2.SetYear(1998)
