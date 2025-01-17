@@ -2,14 +2,20 @@ package utilword
 
 import (
 	"strings"
+	"unicode"
 )
 
 func CountWords(s string) map[string]int {
 	dictionary := make(map[string]int)
+	specSymbols := make(map[string]int)
 
-	specSymbols := [...]string{"!", ",", "?", "\\", "/", ";", ".", "-", "\n", "\r", "\t", ":", "(", ")"}
+	for _, sym := range s {
+		if unicode.IsSpace(sym) || unicode.IsPunct(sym) {
+			specSymbols[string(sym)]++
+		}
+	}
 
-	for _, specSymbol := range specSymbols {
+	for specSymbol := range specSymbols {
 		s = strings.ReplaceAll(s, specSymbol, " ")
 	}
 

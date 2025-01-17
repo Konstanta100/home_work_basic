@@ -33,8 +33,18 @@ func TestCountWords(t *testing.T) {
 			},
 		},
 		{
-			name:    "MainCase",
-			text:    "Тестить-Тестить очень ////сложно-очень тестить    ....тестить!!!СлОжно очень",
+			name:    "RepeatCase",
+			text:    "Тестить-Тестить очень ////сложно-очень \t тестить    ....тестить!!!СлОжно очень",
+			wantLen: 3,
+			wantData: map[string]int{
+				"тестить": 4,
+				"очень":   3,
+				"сложно":  2,
+			},
+		},
+		{
+			name:    "WithoutPunctCase",
+			text:    "Тестить Тестить 'очень' сложно-очень тестить тестить СлОжно очень",
 			wantLen: 3,
 			wantData: map[string]int{
 				"тестить": 4,
