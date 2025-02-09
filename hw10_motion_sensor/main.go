@@ -37,7 +37,7 @@ func generateSensorBuffer(chBuffer chan<- int) {
 			fmt.Println("Timer is out")
 			return
 		default:
-			chBuffer <- rand.Intn(100)
+			chBuffer <- rand.Intn(100) //nolint:gosec
 			time.Sleep(200 * time.Millisecond)
 		}
 	}
