@@ -16,7 +16,7 @@ func TestGenerateSensorBuffer(t *testing.T) {
 		close(done)
 	}()
 
-	timeout := time.After(61 * time.Second)
+	timeout := time.After(59 * time.Second)
 	var values []int
 
 	for {

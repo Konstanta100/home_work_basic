@@ -25,7 +25,7 @@ func generateSensorBuffer(chBuffer chan<- int) {
 	chTimer := make(chan struct{})
 
 	go func(ch chan struct{}) {
-		time.Sleep(60 * time.Second)
+		time.Sleep(58 * time.Second)
 		ch <- struct{}{}
 		close(ch)
 	}(chTimer)
