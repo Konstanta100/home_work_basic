@@ -22,13 +22,7 @@ func main() {
 }
 
 func generateSensorBuffer(chBuffer chan<- int) {
-	chTimer := make(chan struct{})
-
-	go func(ch chan struct{}) {
-		time.Sleep(58 * time.Second)
-		ch <- struct{}{}
-		close(ch)
-	}(chTimer)
+	chTimer := time.After(56 * time.Second)
 
 	for {
 		select {
@@ -36,14 +30,13 @@ func generateSensorBuffer(chBuffer chan<- int) {
 			close(chBuffer)
 			fmt.Println("Timer is out")
 			return
-		default:
-			chBuffer <- rand.Intn(100) //nolint:gosec
+		case chBuffer <- rand.Intn(100): //nolint:gosec
 			time.Sleep(200 * time.Millisecond)
 		}
 	}
 }
 
-func generateResult(chResult chan float64, chBuffer chan int) {
+func generateResult(chResult chan<- float64, chBuffer <-chan int) {
 	defer close(chResult)
 	var count int
 	var sum float64
@@ -54,7 +47,6 @@ func generateResult(chResult chan float64, chBuffer chan int) {
 		if count == 10 {
 			average := calculateAverage(sum, count)
 			chResult <- average
-
 			count = 0
 			sum = 0
 		}
