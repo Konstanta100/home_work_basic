@@ -1,0 +1,29 @@
+warning | Start work GC for PHP process
+error | Проблема с сетью
+info | 1000 user entry to the site
+error | Problem with SSH
+info | order is payed
+error | Problem with SSH
+warning | High memory usage, please clear
+error | Problem with connection to Internet
+warning | Error more then 2000 for 1 hour
+warning | Slow database queries detected
+error | Disk space is critically low
+info | New user registered: ID 12345
+error | Failed to send email notification
+info | Backup process started
+error | Unable to connect to the database
+warning | CPU usage exceeds 90%
+error | SSL certificate expired
+warning | High number of failed login attempts
+error | Payment gateway timeout
+info | 500 products added to the catalog
+error | Critical security vulnerability detected
+warning | API response time is slow
+error | File system corruption detected
+info | Daily report generated successfully
+error | Service "AuthService" is down
+warning | Unusual traffic pattern detected
+error | Data synchronization failed
+info | System update completed
+error | Critical dependency missing: "libssl"
