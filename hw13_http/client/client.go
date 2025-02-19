@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/Konstanta100/home_work_basic/hw13_http/entity"
 )
 
 const HTTP = "http"
@@ -35,7 +37,7 @@ func main() {
 		return
 	}
 
-	page := Page{}
+	page := entity.Page{}
 
 	err = json.Unmarshal(body, &page)
 	if err != nil {
@@ -45,7 +47,7 @@ func main() {
 
 	fmt.Printf("Page: %+v\n", page)
 
-	user := User{
+	user := entity.User{
 		ID:   1,
 		Name: "Test",
 		Age:  26,
@@ -75,7 +77,7 @@ func main() {
 		return
 	}
 
-	var newUser User
+	var newUser entity.User
 
 	err = json.Unmarshal(body, &newUser)
 	if err != nil {
@@ -88,23 +90,4 @@ func main() {
 
 func getURLAddress(host string, res string) string {
 	return HTTP + "://" + host + res
-}
-
-type Page struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Host        string `json:"host"`
-	Resource    string `json:"resource"`
-	Method      string `json:"method"`
-}
-
-type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-	Age  int    `json:"age"`
-}
-
-func (u User) String() string {
-	body, _ := json.Marshal(u)
-	return string(body)
 }

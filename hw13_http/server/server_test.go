@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/Konstanta100/home_work_basic/hw13_http/entity"
 )
 
 func TestMiddleware(t *testing.T) {
@@ -57,7 +59,7 @@ func TestAbout(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
 
-	var page Page
+	var page entity.Page
 	err = json.NewDecoder(rr.Body).Decode(&page)
 	if err != nil {
 		t.Fatal(err)
@@ -86,7 +88,7 @@ func TestAboutMethodNotAllowed(t *testing.T) {
 }
 
 func TestCreateUser(t *testing.T) {
-	user := User{ID: 1, Name: "John Doe", Age: 30}
+	user := entity.User{ID: 1, Name: "John Doe", Age: 30}
 	userJSON, err := json.Marshal(user)
 	if err != nil {
 		t.Fatal(err)
@@ -107,7 +109,7 @@ func TestCreateUser(t *testing.T) {
 			status, http.StatusCreated)
 	}
 
-	var returnedUser User
+	var returnedUser entity.User
 	err = json.NewDecoder(rr.Body).Decode(&returnedUser)
 	if err != nil {
 		t.Fatal(err)

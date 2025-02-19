@@ -5,6 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+
+	"github.com/Konstanta100/home_work_basic/hw13_http/entity"
 )
 
 func main() {
@@ -42,7 +44,7 @@ func about(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 
-	page := Page{
+	page := entity.Page{
 		Name:     "About",
 		Host:     r.Host,
 		Resource: r.URL.Path,
@@ -52,20 +54,6 @@ func about(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(page)
 }
 
-type User struct {
-	ID   int    `json:"id" xml:"id"`
-	Name string `json:"name" xml:"name"`
-	Age  int    `json:"age" xml:"age"`
-}
-
-type Page struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Host        string `json:"host"`
-	Resource    string `json:"resource"`
-	Method      string `json:"method"`
-}
-
 func createUser(w http.ResponseWriter, r *http.Request) {
 	printInfoRequest(r)
 	if r.Method != http.MethodPost {
@@ -73,7 +61,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var newUser User
+	var newUser entity.User
 	err := json.NewDecoder(r.Body).Decode(&newUser)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
