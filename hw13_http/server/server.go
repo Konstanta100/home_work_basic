@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"net"
 	"net/http"
 
 	"github.com/Konstanta100/home_work_basic/hw13_http/entity"
@@ -15,13 +16,13 @@ func main() {
 	flag.Parse()
 
 	fmt.Println("Server start")
-	http.HandleFunc("/", middleware)
+	http.HandleFunc("/", defaultHandler)
 	http.HandleFunc("/about", about)
 	http.HandleFunc("/user/create", createUser)
-	http.ListenAndServe(*host+":"+*port, nil) //nolint:gosec
+	http.ListenAndServe(net.JoinHostPort(*host, *port), nil) //nolint:gosec
 }
 
-func middleware(w http.ResponseWriter, r *http.Request) {
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	printInfoRequest(r)
 
 	if r.Method != http.MethodGet && r.Method != http.MethodPost {

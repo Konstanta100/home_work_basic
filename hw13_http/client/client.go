@@ -11,14 +11,61 @@ import (
 	"github.com/Konstanta100/home_work_basic/hw13_http/entity"
 )
 
-const HTTP = "http"
+const HTTP = "http://"
 
 func main() {
 	address := flag.String("address", "127.0.0.1:8888", "Адрес сайта")
 	resource := flag.String("resource", "/about", "Ресурс на сайте")
 	flag.Parse()
 
-	resp, err := http.Get(getURLAddress(*address, *resource)) //nolint:noctx
+	sendGetPage(HTTP + *address + *resource)
+	sendCreateUser(HTTP + *address)
+}
+
+func sendCreateUser(address string) {
+	user := entity.User{
+		ID:   1,
+		Name: "Test",
+		Age:  26,
+	}
+
+	resp, err := http.Post( //nolint:noctx
+		address+"/user/create",
+		"application/json",
+		strings.NewReader(user.String()),
+	)
+	if err != nil {
+		fmt.Println("Ошибка запроса", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusCreated {
+		fmt.Printf("Ошибка HTTP-ответа: %d\n", resp.StatusCode)
+		return
+	}
+
+	fmt.Println("User created successfully")
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Ошибка чтения", err)
+		return
+	}
+
+	var newUser entity.User
+
+	err = json.Unmarshal(body, &newUser)
+	if err != nil {
+		fmt.Println("Ошибка десериализации", err)
+		return
+	}
+
+	fmt.Printf("User: %+v\n", newUser)
+}
+
+func sendGetPage(address string) {
+	resp, err := http.Get(address) //nolint:gosec, noctx
 	if err != nil {
 		fmt.Println("Ошибка запроса", err)
 		return
@@ -46,48 +93,4 @@ func main() {
 	}
 
 	fmt.Printf("Page: %+v\n", page)
-
-	user := entity.User{
-		ID:   1,
-		Name: "Test",
-		Age:  26,
-	}
-
-	resp, err = http.Post( //nolint:noctx
-		getURLAddress(*address, "/user/create"),
-		"application/json",
-		strings.NewReader(user.String()),
-	)
-	if err != nil {
-		fmt.Println("Ошибка запроса", err)
-		return
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusCreated {
-		fmt.Printf("Ошибка HTTP-ответа: %d\n", resp.StatusCode)
-		return
-	}
-
-	fmt.Println("User created successfully")
-
-	body, err = io.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println("Ошибка чтения", err)
-		return
-	}
-
-	var newUser entity.User
-
-	err = json.Unmarshal(body, &newUser)
-	if err != nil {
-		fmt.Println("Ошибка десериализации", err)
-		return
-	}
-
-	fmt.Printf("User: %+v\n", newUser)
-}
-
-func getURLAddress(host string, res string) string {
-	return HTTP + "://" + host + res
 }

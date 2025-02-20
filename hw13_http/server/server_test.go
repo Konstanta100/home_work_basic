@@ -11,7 +11,7 @@ import (
 	"github.com/Konstanta100/home_work_basic/hw13_http/entity"
 )
 
-func TestMiddleware(t *testing.T) {
+func TestDefaultHandler(t *testing.T) {
 	ctx := context.Background()
 	req, err := http.NewRequestWithContext(ctx, "GET", "/", nil)
 	if err != nil {
@@ -19,7 +19,7 @@ func TestMiddleware(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(middleware)
+	handler := http.HandlerFunc(defaultHandler)
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
@@ -27,7 +27,7 @@ func TestMiddleware(t *testing.T) {
 	}
 }
 
-func TestMiddlewareMethodNotAllowed(t *testing.T) {
+func TestDefaultHandlerMethodNotAllowed(t *testing.T) {
 	ctx := context.Background()
 	req, err := http.NewRequestWithContext(ctx, "HEAD", "/", nil)
 	if err != nil {
@@ -35,7 +35,7 @@ func TestMiddlewareMethodNotAllowed(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(middleware)
+	handler := http.HandlerFunc(defaultHandler)
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusMethodNotAllowed {
