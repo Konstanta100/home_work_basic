@@ -1,3 +1,20 @@
-module github.com/fixme_my_friend/hw15_go_sql
+module github.com/Konstanta100/home_work_basic/hw15_go_sql
 
-go 1.20
+go 1.21
+
+toolchain go1.22.2
+
+require (
+	github.com/caarlos0/env/v11 v11.3.1
+	github.com/jackc/pgx/v5 v5.7.3
+	github.com/joho/godotenv v1.5.1
+)
+
+require (
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
+	github.com/jackc/puddle/v2 v2.2.2 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
+)
