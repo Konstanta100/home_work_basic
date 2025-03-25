@@ -9,12 +9,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
-
 	"github.com/Konstanta100/home_work_basic/hw15_go_sql/internal/config"
 	"github.com/Konstanta100/home_work_basic/hw15_go_sql/internal/repository"
 	"github.com/Konstanta100/home_work_basic/hw15_go_sql/internal/service"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func main() {
